@@ -15,6 +15,10 @@ int main(){
     if(media >= 7.0){ // a estrutura if não tem ";" no final pois ele define um novo bloco de comandos (como o int main())
         printf("Aprovado(a)!\n");
     }
+    else if (media >= 4.0 && media < 7.0){ // C tem os mesmos operadores lógicos do javascript
+        printf("Recuperação! Tem direito a exame!\n");
+    }
+    
     else{
         printf("Reprovado(a)!\n");
     }
