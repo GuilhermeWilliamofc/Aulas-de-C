@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(){
-    printf("Guilherme");
+    printf("Guilherme\n");
+    system("pause");
     return 0;
 }

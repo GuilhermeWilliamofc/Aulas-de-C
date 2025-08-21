@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <locale.h>
+#include <stdlib.h>
 
 int main(){
     setlocale(LC_ALL, "Portuguese");
@@ -10,7 +11,8 @@ int main(){
     printf("Digite outro número inteiro: ");
     scanf("%d", &num2);
 
-    printf("Subtração: %d", num1 - num2);
+    printf("Subtração: %d\n", num1 - num2);
 
+    system("pause");
     return 0;
 }
