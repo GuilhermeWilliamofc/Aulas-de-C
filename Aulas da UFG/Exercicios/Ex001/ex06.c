@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <locale.h>
 
 int main(){
+    setlocale(LC_ALL, "Portuguese");
     int num_digitado;
     printf("Digite um número inteiro: ");
     scanf("%d", &num_digitado);
