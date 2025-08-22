@@ -16,7 +16,7 @@ int main(){
     printf("Informe o valor do imposto: ");
     scanf("%f", &imposto);
 
-    printf("Baseado nas informaÃ§Ãµes apresentadas seu salÃ¡rio Ã© igual a R$%.2f\n", (valor * horas) - imposto);
+    printf("Baseado nas informações apresentadas seu salário é igual a R$%.2f\n", (valor * horas) - imposto);
     
     system("pause");
     return 0;

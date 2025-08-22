@@ -15,7 +15,7 @@ int main(){
 
     volume = pi * (raio_base*raio_base) * altura;
 
-    printf("O volume de um cilindro com raio %.2f e altura %.2f Ã© igual a %.2f\n", raio_base, altura, volume);
+    printf("O volume de um cilindro com raio %.2f e altura %.2f é igual a %.2f\n", raio_base, altura, volume);
     
     system("pause");
     return 0;

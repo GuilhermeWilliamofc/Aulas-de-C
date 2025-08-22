@@ -10,7 +10,7 @@ int main(){
     printf("Digite seu ano de nascimento: ");
     scanf("%d", &ano_nasc);
 
-    printf("Sua idade Ã©: %d\n", ano - ano_nasc);
+    printf("Sua idade é: %d\n", ano - ano_nasc);
     
     system("pause");
     return 0;

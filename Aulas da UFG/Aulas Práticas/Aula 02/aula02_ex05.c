@@ -18,7 +18,7 @@ int main(){
     soma_das_notas = prova1 + prova2 + prova3;
     soma_dos_pesos = 0.10 + 0.30 + 0.60;
 
-    printf("a mÃ©dia ponderada das trÃªs provas Ã© igual a %.2f\n", soma_das_notas/soma_dos_pesos);
+    printf("a média ponderada das três provas é igual a %.2f\n", soma_das_notas/soma_dos_pesos);
     
     system("pause");
     return 0;

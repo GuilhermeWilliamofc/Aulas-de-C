@@ -6,14 +6,14 @@ int main(){
     setlocale(LC_ALL, "Portuguese");
     float num1, num2;
 
-    printf("Digite um nÃºmero: ");
+    printf("Digite um número: ");
     scanf("%f", &num1);
 
-    printf("Digite outro nÃºmero: ");
+    printf("Digite outro número: ");
     scanf("%f", &num2);
 
-    printf("\nO segundo nÃºmero digitado foi \"%.2f\"\n", num2);
-    printf("O primeiro nÃºmero digitado foi \"%.2f\"\n", num1);
+    printf("\nO segundo número digitado foi \"%.2f\"\n", num2);
+    printf("O primeiro número digitado foi \"%.2f\"\n", num1);
     
     system("pause");
     return 0;
