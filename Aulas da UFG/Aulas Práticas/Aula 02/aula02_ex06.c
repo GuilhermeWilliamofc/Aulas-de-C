@@ -13,7 +13,8 @@ int main(){
     printf("Informe o raio do cone: ");
     scanf("%f", &raio);
 
-    printf("O volume do seu cone de altura = %.2f e raio = %.2f é igual a %.2fcm3\n", altura, raio, (pi*(raio*raio)*altura)/3);
+    printf("O volume do seu cone de altura = %.2f e raio = %.2f é igual a %.2fcm\xB3\n", altura, raio, (pi*(raio*raio)*altura)/3);
+    // \xB3 para representar ³ (ao cubo)
     
     system("pause");
     return 0;

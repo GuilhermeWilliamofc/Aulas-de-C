@@ -15,7 +15,7 @@ int main(){
     printf("Digite a terceira nota: ");
     scanf("%f", &prova3);
 
-    soma_das_notas = prova1 + prova2 + prova3;
+    soma_das_notas = (prova1 * 0.1) + (prova2 * 0.3) + (prova3 * 0.6);
     soma_dos_pesos = 0.10 + 0.30 + 0.60;
 
     printf("a média ponderada das três provas é igual a %.2f\n", soma_das_notas/soma_dos_pesos);
