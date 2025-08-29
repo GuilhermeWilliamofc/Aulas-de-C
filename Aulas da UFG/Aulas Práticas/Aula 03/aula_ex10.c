@@ -24,10 +24,10 @@ int main(){
 
     printf("Sua media: %.2f\nSituacao: ", media);
 
-    if (media <= 2.90){
+    if (media < 2.91){
         printf("Reprovado\n");
     }
-    else if (media <= 4.90){
+    else if (media < 4.91){
         printf("Recuperacao\n");
     }
     else{
