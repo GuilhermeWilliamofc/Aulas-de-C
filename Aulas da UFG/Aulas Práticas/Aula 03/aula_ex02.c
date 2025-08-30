@@ -16,7 +16,7 @@ int main(){
         printf("O primeiro valor (%d) eh maior do que o segundo valor (%d)\n", num1, num2);
     }
     else if (num1 == num2){
-        printf("Ambos os valores sao iguais");
+        printf("Ambos os valores sao iguais\n");
     }
     else{
         printf("O segundo valor (%d) eh maior do que o primeiro valor (%d)\n", num2, num1);
