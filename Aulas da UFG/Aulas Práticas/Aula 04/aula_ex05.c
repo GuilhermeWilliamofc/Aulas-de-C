@@ -29,115 +29,148 @@ int main(){
     printf("Qual e o ano?: ");
     scanf("%d", &ano_digitado);
 
-    if (mes_digitado > 0 && mes_digitado <= 12){
-        printf("%d de ", dia_digitado);
+    if (ano_digitado > 0 && ano_digitado <= 2025){
+        switch (mes_digitado)
+        {
+        case 1:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Janeiro");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 2:
+            if(ano_digitado % 400 == 0 && ano_digitado % 100 != 0 || ano_digitado % 4 == 0 && ano_digitado % 100 != 0){ // se for bissexto
+                if (dia_digitado > 0 && dia_digitado <= 29){
+                    printf("%d de ", dia_digitado);
+                    printf("Fevereiro");
+                    printf(" de %d", ano_digitado);
+                }
+                else{
+                    printf("Voce digitou um dia invalido");
+                }
+            }
+            else{ // se não for bissexto
+                if (dia_digitado > 0 && dia_digitado <= 28){
+                    printf("%d de ", dia_digitado);
+                    printf("Fevereiro");
+                    printf(" de %d", ano_digitado);
+                }
+                else{
+                    printf("Voce digitou um dia invalido e o ano de %d nao eh bissexto", ano_digitado);
+                }
+            }
+            break;
+        case 3:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Marco");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 4:
+            if (dia_digitado > 0 && dia_digitado <= 30){
+                printf("%d de ", dia_digitado);
+                printf("Abril");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 5:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Maio");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 6:
+            if (dia_digitado > 0 && dia_digitado <= 30){
+                printf("%d de ", dia_digitado);
+                printf("Junho");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 7:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Julho");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 8:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Agosto");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 9:
+            if (dia_digitado > 0 && dia_digitado <= 30){
+                printf("%d de ", dia_digitado);
+                printf("Setembro");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 10:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Outubro");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 11:
+            if (dia_digitado > 0 && dia_digitado <= 30){
+                printf("%d de ", dia_digitado);
+                printf("Novembro");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        case 12:
+            if (dia_digitado > 0 && dia_digitado <= 31){
+                printf("%d de ", dia_digitado);
+                printf("Dezembro");
+                printf(" de %d", ano_digitado);
+            }
+            else{
+                printf("Voce digitou um dia invalido");
+            }
+            break;
+        default:
+            printf("Voce digitou um mes invalido");
+            break;
+        }
     }
-
-    switch (mes_digitado)
-    {
-    case 1:
-        if (dia_digitado > 0 && dia_digitado <= 31 && dia_digitado > 0 && dia_digitado < 32){
-        printf("Janeiro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 2:
-        if (dia_digitado > 0 && dia_digitado <= 28){
-        printf("Fevereiro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 3:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Marco");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 4:
-        if (dia_digitado > 0 && dia_digitado <= 30){
-        printf("Abril");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 5:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Maio");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 6:
-        if (dia_digitado > 0 && dia_digitado <= 30){
-        printf("Junho");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 7:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Julho");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 8:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Agosto");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 9:
-        if (dia_digitado > 0 && dia_digitado <= 30){
-        printf("Setembro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 10:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Outubro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 11:
-        if (dia_digitado > 0 && dia_digitado <= 30){
-        printf("Novembro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    case 12:
-        if (dia_digitado > 0 && dia_digitado <= 31){
-        printf("Dezembro");
-        }
-        else{
-            printf("Voce digitou um dia invalido");
-        }
-        break;
-    default:
-        printf("Voce digitou um mes invalido");
-        break;
-    }
-
-    if (mes_digitado > 0 && mes_digitado <= 12 && dia_digitado > 0 && dia_digitado < 32){
-        printf(" de %d", ano_digitado);
+    else{
+        printf("Voce digitou um ano invalido");
     }
 
     printf("\n");
