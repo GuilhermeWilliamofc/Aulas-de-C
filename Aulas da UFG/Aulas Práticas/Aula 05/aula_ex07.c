@@ -18,17 +18,29 @@ int main(){
     printf("Digite o valor final: ");
     scanf("%d", &final);
 
-    for (cont = inicial; cont <= final; cont ++){
-        if (cont % 2 == 0){
-            soma += cont;
+    if (inicial < final){
+        for (cont = inicial; cont <= final; cont ++){
+            if (cont % 2 == 0){
+                soma += cont;
+            }
+            else{
+                multiplicacao *= cont;
+            }
         }
-        else{
-            multiplicacao *= cont;
+    }
+    else{
+        for (cont = final; cont <= inicial; cont ++){
+            if (cont % 2 == 0){
+                soma += cont;
+            }
+            else{
+                multiplicacao *= cont;
+            }
         }
     }
 
-    printf("A soma dos numeros pares desse intervalo de numeros (%d - %d) eh igual a %d\n", inicial, final, soma);
-    printf("A multiplicacao dos numeros impares desse intervalo (%d - %d) eh igual a %d\n", inicial, final, multiplicacao);
+    printf("A soma dos numeros pares desse intervalo de numeros (do %d ao %d) eh igual a %d\n", inicial, final, soma);
+    printf("A multiplicacao dos numeros impares desse intervalo (do %d ao %d) eh igual a %d\n", inicial, final, multiplicacao);
 
     system("pause");
     return 0;
