@@ -29,12 +29,22 @@ int main(){
     float media_resultado;
 
     for(cont = 0; cont < 3; cont++){
-        printf("Digite a %d nota: ", cont + 1);
-        scanf("%f", &notas[cont]);
+        do{
+            printf("Digite a %d nota: ", cont + 1);
+            scanf("%f", &notas[cont]);
+            if(notas[cont] > 10 || notas[cont] < 0){
+                printf("\033[31mErro! Digite uma nota valida! (entre 0 e 10)\n\033[m");
+            }
+        } while(notas[cont] > 10 || notas[cont] < 0);
     }
 
-    printf("\nDigite o tipo de media\nA - Aritmetica\nP - Ponderada\nTipo: ");
-    scanf(" %c", &tipo);
+    do{
+        printf("\nDigite o tipo de media\nA - Aritmetica\nP - Ponderada\nTipo: ");
+        scanf(" %c", &tipo);
+        if(tipo != 'A' && tipo != 'a' && tipo != 'P' && tipo != 'p'){
+            printf("\033[31mErro! Digite um tipo de media valido!\033[m");
+        }
+    } while(tipo != 'A' && tipo != 'a' && tipo != 'P' && tipo != 'p');
 
     media_resultado = media_aluno(notas[0], notas[1], notas[2], tipo);
 
