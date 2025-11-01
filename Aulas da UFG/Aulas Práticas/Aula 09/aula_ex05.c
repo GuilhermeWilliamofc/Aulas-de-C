@@ -6,8 +6,8 @@ calcula o seu volume (v = 4/3.P .R3). */
 #include <math.h>
 
 float volume_da_esfera(float raio_da_esfera){
-    float pi = 3.14159;
-    return ((4/3) * pi * pow(raio_da_esfera, 3));
+    const float pi = 3.14159f;
+    return ((4.0f/3.0f) * pi * powf(raio_da_esfera, 3.0f));
 }
 
 int main(){
