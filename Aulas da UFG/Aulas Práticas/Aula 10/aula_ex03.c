@@ -81,6 +81,19 @@ int main(){
             printf("Digite o ano de nascimento: ");
             scanf("%d", &data_fornecida.ano);
             fflush(stdin);
+
+            for (cont = 0; cont < cadastrados; cont++){
+                if (pessoas[cont].data_de_nascimento.ano > data_fornecida.ano ||
+                (pessoas[cont].data_de_nascimento.ano == data_fornecida.ano &&
+                pessoas[cont].data_de_nascimento.mes > data_fornecida.mes) ||
+                (pessoas[cont].data_de_nascimento.ano == data_fornecida.ano &&
+                pessoas[cont].data_de_nascimento.mes == data_fornecida.mes &&
+                pessoas[cont].data_de_nascimento.dia > data_fornecida.dia)){
+                    printf("Nome: %s", pessoas[cont].nome);
+                    printf("Altura: %.2f\n", pessoas[cont].altura);
+                    printf("Data de nascimento: %d/%d/%d\n", pessoas[cont].data_de_nascimento.dia, pessoas[cont].data_de_nascimento.mes, pessoas[cont].data_de_nascimento.ano);
+                }
+            }
         }
         else if (opcao < 1 || opcao > 4){
             printf("\033[31mErro! Escolha uma opcao valida!\033[m\n");
