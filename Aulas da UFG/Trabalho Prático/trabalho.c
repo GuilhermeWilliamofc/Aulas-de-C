@@ -40,9 +40,9 @@ negativo seja aceito.
 2. classificarConsumo
 - Entrada: vetor com os consumos.
 - Processo: classifica o consumo de cada apartamento em:
-- Baixo: menor que 10 m³;
-- Médio: entre 10 e 20 m³;
-- Alto: acima de 20 m³.
+- Baixo: menor que 10 m³; 10000 litros
+- Médio: entre 10 e 20 m³; 10000 e 20000 litros
+- Alto: acima de 20 m³. acima de 20000 litros
 - Saída: retorna ou exibe a classificação de cada apartamento juntamente com o valor
 consumido.
 3. calcularMediaConsumo
@@ -63,39 +63,160 @@ correspondente.
 
 #include <stdio.h>
 
-void coletarConsumo(int num_de_apartamentos, int valores_de_consumo[]){ // tem o numero de apartamentos e o vetor como parametro
-    int contador;
+void coletarConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+    int andar, apt;
     int valor_temporario; // esse valor temporario serve para guardar o valor digitado durante a validação dos dados
 
-    for (contador = 0; contador < num_de_apartamentos; contador++){
-        do {
-            printf("Digite o valor de consumo (em litros) do apartamento %d: ", contador + 1);
-            scanf("%d", &valor_temporario); // vai guardar o valor de consumo digitado pelo usuario
-        } while (valor_temporario < 0); // o loop vai ocorrer enquanto o usuario digitar um valor negativo
+    for (andar = 0; andar < num_andares; andar++){
+        for (apt = 0; apt < num_apts_por_andar; apt++){
+            do {
+                printf("Digite o valor de consumo (em litros) do andar %d, apto %d: ", andar + 1, apt + 1);
+                scanf("%d", &valor_temporario); // vai guardar o valor de consumo digitado pelo usuario
+                if (valor_temporario <= 0){
+                    printf("Erro! Digite um valor maior que 0!\n"); // caso o usuario digite um valor negativo ou nulo (vulgo zero)
+                }
+            } while (valor_temporario <= 0); // o loop vai ocorrer enquanto o usuario digitar um valor negativo ou um valor nulo (vulgo zero)
 
-        valores_de_consumo[contador] = valor_temporario; // se sair do loop significa que o valor digitado eh valido então guarda esse valor no vetor
+            valores_de_consumo[andar][apt] = valor_temporario; // se sair do loop significa que o valor digitado eh valido então guarda esse valor no vetor
+        }
     }
 }
 
+void classificarConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+    int andar, apt;
+
+    for (andar = 0; andar < num_andares; andar++){
+        printf("\nAndar %d:\n", andar + 1);
+        for (apt = 0; apt < num_apts_por_andar; apt++){
+            printf("O consumo do andar %d, apto %d eh: ", andar + 1, apt + 1);
+            if (valores_de_consumo[andar][apt] < 10000){
+                printf("Baixo"); // consumo baixo
+            }
+            else if (valores_de_consumo[andar][apt] >= 10000 && valores_de_consumo[andar][apt] <= 20000){
+                printf("Medio"); // consumo medio
+            }
+            else if (valores_de_consumo[andar][apt] > 20000){
+                printf("Alto"); // consumo alto
+            }
+            printf("\nValor Consumido: %d litros\n", valores_de_consumo[andar][apt]);
+        }
+    }
+}
+
+float calcularMediaConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
+    int andar, apt;
+    float soma_total = 0;
+    float total = num_andares * num_apts_por_andar;
+    for (andar = 0; andar < num_andares; andar++){
+        for (apt = 0; apt < num_apts_por_andar; apt++){
+            soma_total += valores_de_consumo[andar][apt];
+        }
+    }
+    return soma_total / total;
+}
+
+void encontrarExtremos(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
+    int maior, menor, num_apart_menor, num_apart_maior, andar, apt, num_andar_menor, num_andar_maior;
+
+    for (andar = 0; andar < num_andares; andar++){
+        for (apt = 0; apt < num_apts_por_andar; apt++){
+            if (andar == 0 && apt == 0){
+                menor = valores_de_consumo[andar][apt];
+                maior = valores_de_consumo[andar][apt];
+                num_apart_menor = apt + 1;
+                num_apart_maior = apt + 1;
+                num_andar_menor = andar + 1;
+                num_andar_maior = andar + 1;
+            }
+            else{
+                if (valores_de_consumo[andar][apt] < menor){
+                    menor = valores_de_consumo[andar][apt];
+                    num_apart_menor = apt + 1;
+                    num_andar_menor = andar + 1;
+                }
+                else if (valores_de_consumo[andar][apt] > maior){
+                    maior = valores_de_consumo[andar][apt];
+                    num_apart_maior = apt + 1;
+                    num_andar_maior = andar + 1;
+                }
+            }
+        }
+    }
+
+    printf("O apartamento de menor consumo foi o Andar %d, Apto %d, que teve o consumo de %d litros\n", num_andar_menor, num_apart_menor, menor);
+    printf("O apartamento de maior consumo foi o Andar %d, Apto %d, que teve o consumo de %d litros\n", num_andar_maior, num_apart_maior, maior);
+}
+
+void gerarRelatorioFinal(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
+    float media;
+
+    printf("\nRelatorio do Condominio:");
+    printf("\nConsumo e classificacao por apartamento:\n");
+    classificarConsumo(num_andares, num_apts_por_andar, valores_de_consumo);
+    printf("\nMedia geral do condominio:");
+    media = calcularMediaConsumo(num_andares, num_apts_por_andar, valores_de_consumo);
+    printf("\nA media de consumo do condominio eh: %.2f litros\n", media);
+    printf("\nApartamentos com maior e menor consumo:\n");
+    encontrarExtremos(num_andares, num_apts_por_andar, valores_de_consumo);
+    printf("\n");
+}
+
 int main(){
-    int opcao, num_de_apartamentos;
+    int opcao, num_andares, num_apts_por_andar;
+    float media;
 
     printf("Bem-vindo ao Analisador de Consumo de Agua do Condominio\n"); // Mensagem de boas vindas
 
-    printf("Digite o numero total de apartamentos: ");
-    scanf("%d", &num_de_apartamentos);
+    do{
+        printf("Digite o numero total de andares: ");
+        scanf("%d", &num_andares);
+        if (num_andares <= 0){
+            printf("Erro! Digite um valor maior que 0!\n"); // caso o usuario digite um valor negativo ou nulo (vulgo zero)
+        }
+    } while (num_andares <= 0);
 
-    int valores_de_consumo[num_de_apartamentos]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
+    do{
+        printf("Digite o numero total de apartamentos por andar: ");
+        scanf("%d", &num_apts_por_andar);
+        if (num_apts_por_andar <= 0){
+            printf("Erro! Digite um valor maior que 0!\n"); // caso o usuario digite um valor negativo ou nulo (vulgo zero)
+        }
+    } while (num_apts_por_andar <= 0);
+
+    int valores_de_consumo[num_andares][num_apts_por_andar]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
+
+    coletarConsumo(num_andares, num_apts_por_andar, valores_de_consumo); // obrigar o usuario a digitar os valores de consumo antes do menu para evitar do vetor ter lixo de memoria
 
     do{
         printf("[ 1 ] - Cadastrar consumo dos apartamentos\n");
-        printf("[ 4 ] - Sair\n"); // opção de sair
+        printf("[ 2 ] - Classificar consumo dos apartamentos\n");
+        printf("[ 3 ] - Verificar a media de consumo do condominio\n");
+        printf("[ 4 ] - Identificar os apartamentos de maior e menor consumo\n");
+        printf("[ 5 ] - Gerar Relatorio Final\n");
+        printf("[ 6 ] - Sair\n"); // opção de sair
 
         printf("Sua Opcao: ");
         scanf("%d", &opcao);
 
         if (opcao == 1){
-            coletarConsumo(num_de_apartamentos, valores_de_consumo);
+            coletarConsumo(num_andares, num_apts_por_andar, valores_de_consumo);
         }
-    } while (opcao != 4); // enquanto a opção de sair do programa não for escolhida o loop vai continuar
+        else if (opcao == 2){
+            classificarConsumo(num_andares, num_apts_por_andar, valores_de_consumo);
+        }
+        else if (opcao == 3){
+            media = calcularMediaConsumo(num_andares, num_apts_por_andar, valores_de_consumo);
+            printf("A media de consumo do condominio eh: %.2f litros\n", media);
+        }
+        else if (opcao == 4){
+            encontrarExtremos(num_andares, num_apts_por_andar, valores_de_consumo);
+        }
+        else if (opcao == 5){
+            gerarRelatorioFinal(num_andares, num_apts_por_andar, valores_de_consumo);
+        }
+        else{
+            printf("Erro! Digite uma opcao valida!\n");
+        }
+    } while (opcao != 6); // enquanto a opção de sair do programa não for escolhida o loop vai continuar
+    printf("Fim do Programa\n");
 }
