@@ -63,15 +63,15 @@ correspondente.
 
 #include <stdio.h>
 
-void coletarConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+void coletarConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
     int andar, apt;
-    int valor_temporario; // esse valor temporario serve para guardar o valor digitado durante a validação dos dados
+    float valor_temporario; // esse valor temporario serve para guardar o valor digitado durante a validação dos dados
 
     for (andar = 0; andar < num_andares; andar++){
         for (apt = 0; apt < num_apts_por_andar; apt++){
             do {
                 printf("Digite o valor de consumo (em litros) do andar %d, apto %d: ", andar + 1, apt + 1);
-                scanf("%d", &valor_temporario); // vai guardar o valor de consumo digitado pelo usuario
+                scanf("%f", &valor_temporario); // vai guardar o valor de consumo digitado pelo usuario
                 if (valor_temporario <= 0){
                     printf("Erro! Digite um valor maior que 0!\n"); // caso o usuario digite um valor negativo ou nulo (vulgo zero)
                 }
@@ -82,7 +82,7 @@ void coletarConsumo(int num_andares, int num_apts_por_andar, int valores_de_cons
     }
 }
 
-void classificarConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+void classificarConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
     int andar, apt;
 
     for (andar = 0; andar < num_andares; andar++){
@@ -98,12 +98,12 @@ void classificarConsumo(int num_andares, int num_apts_por_andar, int valores_de_
             else if (valores_de_consumo[andar][apt] > 20000){
                 printf("Alto"); // consumo alto
             }
-            printf("\nValor Consumido: %d litros\n", valores_de_consumo[andar][apt]);
+            printf("\nValor Consumido: %.2f litros\n", valores_de_consumo[andar][apt]);
         }
     }
 }
 
-float calcularMediaConsumo(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
+float calcularMediaConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
     int andar, apt;
     float soma_total = 0;
     float total = num_andares * num_apts_por_andar;
@@ -115,8 +115,9 @@ float calcularMediaConsumo(int num_andares, int num_apts_por_andar, int valores_
     return soma_total / total;
 }
 
-void encontrarExtremos(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
-    int maior, menor, num_apart_menor, num_apart_maior, andar, apt, num_andar_menor, num_andar_maior;
+void encontrarExtremos(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
+    int num_apart_menor, num_apart_maior, andar, apt, num_andar_menor, num_andar_maior;
+    float maior, menor;
 
     for (andar = 0; andar < num_andares; andar++){
         for (apt = 0; apt < num_apts_por_andar; apt++){
@@ -143,11 +144,11 @@ void encontrarExtremos(int num_andares, int num_apts_por_andar, int valores_de_c
         }
     }
 
-    printf("O apartamento de menor consumo foi o Andar %d, Apto %d, que teve o consumo de %d litros\n", num_andar_menor, num_apart_menor, menor);
-    printf("O apartamento de maior consumo foi o Andar %d, Apto %d, que teve o consumo de %d litros\n", num_andar_maior, num_apart_maior, maior);
+    printf("O apartamento de menor consumo foi o Andar %d, Apto %d, que teve o consumo de %.2f litros\n", num_andar_menor, num_apart_menor, menor);
+    printf("O apartamento de maior consumo foi o Andar %d, Apto %d, que teve o consumo de %.2f litros\n", num_andar_maior, num_apart_maior, maior);
 }
 
-void gerarRelatorioFinal(int num_andares, int num_apts_por_andar, int valores_de_consumo[][num_apts_por_andar]){
+void gerarRelatorioFinal(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
     float media;
 
     printf("\nRelatorio do Condominio:");
@@ -183,7 +184,7 @@ int main(){
         }
     } while (num_apts_por_andar <= 0);
 
-    int valores_de_consumo[num_andares][num_apts_por_andar]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
+    float valores_de_consumo[num_andares][num_apts_por_andar]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
 
     coletarConsumo(num_andares, num_apts_por_andar, valores_de_consumo); // obrigar o usuario a digitar os valores de consumo antes do menu para evitar do vetor ter lixo de memoria
 
@@ -214,7 +215,7 @@ int main(){
         else if (opcao == 5){
             gerarRelatorioFinal(num_andares, num_apts_por_andar, valores_de_consumo);
         }
-        else{
+        else if (opcao != 6) {
             printf("Erro! Digite uma opcao valida!\n");
         }
     } while (opcao != 6); // enquanto a opção de sair do programa não for escolhida o loop vai continuar
