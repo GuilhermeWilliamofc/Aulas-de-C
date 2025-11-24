@@ -63,7 +63,11 @@ correspondente.
 
 #include <stdio.h>
 
-void coletarConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+typedef struct {
+    float consumo;
+} Apartamento;
+
+void coletarConsumo(int num_andares, int num_apts_por_andar, Apartamento valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
     int andar, apt;
     float valor_temporario; // esse valor temporario serve para guardar o valor digitado durante a validação dos dados
 
@@ -77,66 +81,66 @@ void coletarConsumo(int num_andares, int num_apts_por_andar, float valores_de_co
                 }
             } while (valor_temporario <= 0); // o loop vai ocorrer enquanto o usuario digitar um valor negativo ou um valor nulo (vulgo zero)
 
-            valores_de_consumo[andar][apt] = valor_temporario; // se sair do loop significa que o valor digitado eh valido então guarda esse valor no vetor
+            valores_de_consumo[andar][apt].consumo = valor_temporario; // se sair do loop significa que o valor digitado eh valido então guarda esse valor no vetor
         }
     }
 }
 
-void classificarConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
+void classificarConsumo(int num_andares, int num_apts_por_andar, Apartamento valores_de_consumo[][num_apts_por_andar]){ // tem o numero de apartamentos e o vetor como parametro
     int andar, apt;
 
     for (andar = 0; andar < num_andares; andar++){
         printf("\nAndar %d:\n", andar + 1);
         for (apt = 0; apt < num_apts_por_andar; apt++){
             printf("O consumo do andar %d, apto %d eh: ", andar + 1, apt + 1);
-            if (valores_de_consumo[andar][apt] < 10000){
+            if (valores_de_consumo[andar][apt].consumo < 10000){
                 printf("Baixo"); // consumo baixo
             }
-            else if (valores_de_consumo[andar][apt] >= 10000 && valores_de_consumo[andar][apt] <= 20000){
+            else if (valores_de_consumo[andar][apt].consumo >= 10000 && valores_de_consumo[andar][apt].consumo <= 20000){
                 printf("Medio"); // consumo medio
             }
-            else if (valores_de_consumo[andar][apt] > 20000){
+            else if (valores_de_consumo[andar][apt].consumo > 20000){
                 printf("Alto"); // consumo alto
             }
-            printf("\nValor Consumido: %.2f litros\n", valores_de_consumo[andar][apt]);
+            printf("\nValor Consumido: %.2f litros\n", valores_de_consumo[andar][apt].consumo);
         }
     }
 }
 
-float calcularMediaConsumo(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
+float calcularMediaConsumo(int num_andares, int num_apts_por_andar, Apartamento valores_de_consumo[][num_apts_por_andar]){
     int andar, apt;
     float soma_total = 0;
     float total = num_andares * num_apts_por_andar;
     for (andar = 0; andar < num_andares; andar++){
         for (apt = 0; apt < num_apts_por_andar; apt++){
-            soma_total += valores_de_consumo[andar][apt];
+            soma_total += valores_de_consumo[andar][apt].consumo;
         }
     }
     return soma_total / total;
 }
 
-void encontrarExtremos(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
+void encontrarExtremos(int num_andares, int num_apts_por_andar, Apartamento valores_de_consumo[][num_apts_por_andar]){
     int num_apart_menor, num_apart_maior, andar, apt, num_andar_menor, num_andar_maior;
     float maior, menor;
 
     for (andar = 0; andar < num_andares; andar++){
         for (apt = 0; apt < num_apts_por_andar; apt++){
             if (andar == 0 && apt == 0){
-                menor = valores_de_consumo[andar][apt];
-                maior = valores_de_consumo[andar][apt];
+                menor = valores_de_consumo[andar][apt].consumo;
+                maior = valores_de_consumo[andar][apt].consumo;
                 num_apart_menor = apt + 1;
                 num_apart_maior = apt + 1;
                 num_andar_menor = andar + 1;
                 num_andar_maior = andar + 1;
             }
             else{
-                if (valores_de_consumo[andar][apt] < menor){
-                    menor = valores_de_consumo[andar][apt];
+                if (valores_de_consumo[andar][apt].consumo < menor){
+                    menor = valores_de_consumo[andar][apt].consumo;
                     num_apart_menor = apt + 1;
                     num_andar_menor = andar + 1;
                 }
-                else if (valores_de_consumo[andar][apt] > maior){
-                    maior = valores_de_consumo[andar][apt];
+                else if (valores_de_consumo[andar][apt].consumo > maior){
+                    maior = valores_de_consumo[andar][apt].consumo;
                     num_apart_maior = apt + 1;
                     num_andar_maior = andar + 1;
                 }
@@ -148,7 +152,7 @@ void encontrarExtremos(int num_andares, int num_apts_por_andar, float valores_de
     printf("O apartamento de maior consumo foi o Andar %d, Apto %d, que teve o consumo de %.2f litros\n", num_andar_maior, num_apart_maior, maior);
 }
 
-void gerarRelatorioFinal(int num_andares, int num_apts_por_andar, float valores_de_consumo[][num_apts_por_andar]){
+void gerarRelatorioFinal(int num_andares, int num_apts_por_andar, Apartamento valores_de_consumo[][num_apts_por_andar]){
     float media;
 
     printf("\nRelatorio do Condominio:");
@@ -184,7 +188,7 @@ int main(){
         }
     } while (num_apts_por_andar <= 0);
 
-    float valores_de_consumo[num_andares][num_apts_por_andar]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
+    Apartamento valores_de_consumo[num_andares][num_apts_por_andar]; // o vetor foi criado aqui para ter o mesmo tamanho do número de apartamentos
 
     coletarConsumo(num_andares, num_apts_por_andar, valores_de_consumo); // obrigar o usuario a digitar os valores de consumo antes do menu para evitar do vetor ter lixo de memoria
 
