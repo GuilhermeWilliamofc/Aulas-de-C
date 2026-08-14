@@ -5,3 +5,10 @@ separadas para determinar o maior valor, o menor valor e a média aritmética.
 resultados.
 */
 
+#include <stdio.h>
+#include "ex005_lib.h"
+
+int main(){
+    
+    return 0;
+}
