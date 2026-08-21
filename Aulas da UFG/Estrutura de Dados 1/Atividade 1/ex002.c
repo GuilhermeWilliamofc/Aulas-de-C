@@ -11,7 +11,7 @@ int main(){
     
     for (int cont = 0; cont < MAX; cont++){
         vetor[cont] = cont + 1;
-        printf("vetor[%d]: ",cont);
+        printf("vetor[%d]: ", cont);
         printf("%d\n",vetor[cont]);
     }
 
