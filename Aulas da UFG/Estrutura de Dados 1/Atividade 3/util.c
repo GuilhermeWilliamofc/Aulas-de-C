@@ -16,22 +16,17 @@ int* gerar_vetor(size_t quantidade) {
     return numeros;
 }
 
-int* realocar_vetor(size_t nova_quantidade) {
-    int *numeros;
-    int tamanho_tipo = sizeof *numeros;
+int* realocar_vetor(int *numeros, size_t nova_quantidade) {
+    int *novo_numeros;
 
-    int *novo_numeros = realloc(numeros, nova_quantidade * tamanho_tipo);
+    novo_numeros = realloc(numeros, nova_quantidade * sizeof *numeros);
 
     if (novo_numeros == NULL) {
         printf("Nao foi possivel realocar o vetor\n");
-        free(numeros);
-        return numeros;
+        return NULL;
     }
 
-    numeros = novo_numeros;
-    novo_numeros = NULL;
-
-    return numeros;
+    return novo_numeros;
 }
 
 int preencher_vetor(int quantidade, int *vetor) {

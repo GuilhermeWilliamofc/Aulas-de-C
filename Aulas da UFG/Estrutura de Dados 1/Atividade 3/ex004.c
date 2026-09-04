@@ -9,3 +9,22 @@ Aloque um nó com malloc, leia um inteiro e armazene-o no campo valor. Defina pr
 Imprima o valor armazenado e o endereço do nó; para o endereço, utilize %p e converta o ponteiro para
 void *. Ao final, libere a memória.
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "util.h"
+
+int main(){
+    No *novo_no = malloc(sizeof(No));
+
+    printf("Digite um valor para armazenar: ");
+    scanf("%d", &novo_no->valor);
+    novo_no->proximo = NULL;
+
+    printf("Valor Armazenado: %d\n", novo_no->valor);
+    printf("Endereco do Valor Armazenado: %p\n", (void *)novo_no);
+
+    free(novo_no);
+
+    return 0;
+}

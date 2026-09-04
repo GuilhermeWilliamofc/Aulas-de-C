@@ -12,29 +12,45 @@ manutenção do tamanho.
 #include <stdlib.h>
 #include "util.h"
 
-int main(){
+int main() {
     int quantidade;
     int nova_quantidade;
 
     printf("Digite o tamanho do vetor: ");
     scanf("%d", &quantidade);
 
-    int *vetor = gerar_vetor((size_t) quantidade);
+    int *vetor = gerar_vetor((size_t)quantidade);
+
+    if (vetor == NULL) {
+        printf("Erro ao alocar memoria.\n");
+        return 1;
+    }
 
     preencher_vetor(quantidade, vetor);
+
     printf("\n");
     printar_vetor(quantidade, vetor);
 
     printf("Digite o novo tamanho do vetor: ");
     scanf("%d", &nova_quantidade);
 
-    vetor = realocar_vetor(nova_quantidade);
+    int *temporario = realocar_vetor(vetor, (size_t)nova_quantidade);
 
-    preencher_vetor(nova_quantidade, vetor);
+    if (temporario == NULL) {
+        free(vetor);
+        return 1;
+    }
+
+    vetor = temporario;
+
+    if (nova_quantidade > quantidade) {
+        preencher_vetor(nova_quantidade - quantidade, vetor + quantidade);
+    }
+
     printf("\n");
     printar_vetor(nova_quantidade, vetor);
 
     free(vetor);
-    system("pause");
+
     return 0;
 }

@@ -3,9 +3,19 @@
 
 #include <stddef.h>
 
+typedef struct No {
+    int valor;
+    struct No *proximo;
+} No;
+
+typedef struct Lista {
+    No inicio;
+    int quantidade;
+} Lista;
+
 int* gerar_vetor(size_t quantidade);
 
-int* realocar_vetor(size_t nova_quantidade);
+int* realocar_vetor(int *numeros, size_t nova_quantidade);
 
 int preencher_vetor(int quantidade, int *vetor);
 
