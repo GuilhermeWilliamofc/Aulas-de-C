@@ -17,5 +17,10 @@ void inicializar(Lista *lista);
 int estaVazia(Lista lista);
 int obterQuantidade(Lista lista);
 void imprimir(Lista lista);
+void preencherLista(Lista *lista, int quantidade);
+int inserirInicio(Lista *lista, int valor);
+int inserirFinal(Lista *lista, int valor);
+int buscar(Lista lista, int valor);
+int remover(Lista *lista, int valor);
 
 #endif

@@ -12,3 +12,19 @@ void imprimir(Lista lista);
 #include <stdlib.h>
 
 #include "util.h"
+
+int main(){
+    Lista lista1;
+
+    printf("Lista sem elementos:\n");
+    inicializar(&lista1);
+    imprimir(lista1);
+    printf("Tamanho da Lista: %d Elemento(s)\n", obterQuantidade(lista1));
+
+    printf("\nLista com 5 elementos:\n");
+    preencherLista(&lista1, 5); // fiz essa funcao pra testar quando tem elementos
+    imprimir(lista1);
+    printf("Tamanho da Lista: %d Elemento(s)\n", obterQuantidade(lista1));
+
+    return 0;
+}
