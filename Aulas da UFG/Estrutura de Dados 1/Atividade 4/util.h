@@ -22,5 +22,6 @@ int inserirInicio(Lista *lista, int valor);
 int inserirFinal(Lista *lista, int valor);
 int buscar(Lista lista, int valor);
 int remover(Lista *lista, int valor);
+void liberar(Lista *lista);
 
 #endif

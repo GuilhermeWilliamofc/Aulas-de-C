@@ -143,3 +143,16 @@ int remover(Lista *lista, int valor){
 
     return 1;
 }
+
+void liberar(Lista *lista){
+    No *atual = lista->inicio;
+
+    while (atual != NULL) {
+        No *temp = atual->proximo;
+        free(atual);
+        atual = temp;
+    }
+    
+    lista->inicio = NULL;
+    lista->quantidade = 0;
+}
